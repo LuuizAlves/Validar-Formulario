@@ -1,6 +1,7 @@
 import React, {useState, Fragment} from 'react'
 import {useNavigation} from '@react-navigation/native'
-import { StyleSheet, View, Button, TextInput, SafeAreaView, Text} from 'react-native'
+import { StyleSheet, View, TextInput, SafeAreaView, Text} from 'react-native'
+import { Button } from 'react-native-elements'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
@@ -46,61 +47,60 @@ export default function Login(){
 
   return(
     <SafeAreaView style={styles.container}>
-        <Formik
-          initialValues={{email: '', password: ''}}
-          onSubmit={(values) => {
-            OnHome(values)
-          }}
-          validationSchema={validationSchema}
-        >
-          {({ handleChange, values, handleSubmit, errors, isValid, isSubmitting, touched, handleBlur }) => (
-            <Fragment>
-              <FormInput
-                name="email"
-                value={values.email}
-                placeholder="Enter email"
-                autoCapitalize="none"
-                onChangeText={handleChange('email')}
-                iconName="ios-mail"
-                iconColor="#2C384A"
-                onBlur={handleBlur("email")}
-              />
-              <ErrorMessage errorValue={touched.email && errors.email } />
+        <View style={styles.containerLogin}>
+          <Formik
+            initialValues={{email: '', password: ''}}
+            onSubmit={(values) => {
+              OnHome(values)
+            }}
+            validationSchema={validationSchema}
+          >
+            {({ handleChange, values, handleSubmit, errors, isValid, isSubmitting, touched, handleBlur }) => (
+              <Fragment>
+                <FormInput
+                  name="email"
+                  value={values.email}
+                  placeholder="Enter email"
+                  autoCapitalize="none"
+                  onChangeText={handleChange('email')}
+                  iconName="ios-mail"
+                  iconColor="#2C384A"
+                  onBlur={handleBlur("email")}
+                />
+                <ErrorMessage errorValue={touched.email && errors.email } />
 
-              <FormInput
-                name="password"
-                value={values.password}
-                placeholder="Enter password"
-                secureTextEntry
-                onChangeText={handleChange('password')}
-                iconName="ios-lock"
-                iconColor="#2C384A"
-                onBlur={handleBlur("password")}
-              />
-              <ErrorMessage errorValue={touched.password && errors.password} />
-              
-              <ButtomType
-                onPress={handleSubmit}
-                text="LOGIN"
-                color="#039BE5"
-                disabled={!isValid}
-                disabled={!isValid || isSubmitting}
-                loading={isSubmitting}
-              />
-            </Fragment>
-          )}
-        </Formik>
+                <FormInput
+                  name="password"
+                  value={values.password}
+                  placeholder="Enter password"
+                  secureTextEntry
+                  onChangeText={handleChange('password')}
+                  iconName="ios-lock"
+                  iconColor="#2C384A"
+                  onBlur={handleBlur("password")}
+                />
+                <ErrorMessage errorValue={touched.password && errors.password} />
 
-        <Button
-          title="Don't have an account? Sign Up"
-          onPress={navigationSignup}
-          titleStyle={{
-            color: '#F57C00'
-          }}
-          type="clear"
-        />
+                <FormButton
+                  onPress={handleSubmit}
+                  title="LOGIN"
+                  buttonColor="#039BE5"
+                  disabled={!isValid || isSubmitting}
+                  loading={isSubmitting}
+                />
+              </Fragment>
+            )}
+          </Formik>
 
-        
+          <Button
+            title="Don't have an account? Sign Up"
+            onPress={navigationSignup}
+            titleStyle={{
+              color: '#F57C00'
+            }}
+            type="clear"
+          />
+        </View>
       </SafeAreaView>
   )
 }
@@ -112,7 +112,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  containerLogin: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    maxWidth: 300
+
+  },
   buttonContainer: {
     margin: 25
+  },
+  buttomTest: {
+    width: '100%',
+    maxWidth: 300
   }
 })

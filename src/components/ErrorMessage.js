@@ -9,7 +9,6 @@ const ErrorMessage = ({errorValue}) => (
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 50,
     alignSelf: 'flex-start'
   },
   errorText: {
